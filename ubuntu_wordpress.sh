@@ -166,10 +166,12 @@ sudo sed -i 's/password_here/'$MYSQLPASSWORD'/g' ./wordpress/wp-config.php
 sudo sed -i "s/define( 'DB_HOST', 'localhost' );/define( 'DB_HOST', '${db_host_local}' );/g" ./wordpress/wp-config.php
 # - set up SALT to enhance Wordpress security
 sudo curl -s https://api.wordpress.org/secret-key/1.1/salt/ > ./wordpress/keys.txt
-cat ./wordpress/keys.txt >> ./wordpress/wp-config.php
+#cat ./wordpress/keys.txt >> ./wordpress/wp-config.php
+sudo bash -c "cat ./wordpress/keys.txt >> ./wordpress/wp-config.php"
 # - enable to update WordPress Directly without using any FTP
-sudo echo -en "define('FS_METHOD', 'direct');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php;
-dos2unix ./wordpress/wp-config.php
+sudo bash -c 'echo -en "define('FS_METHOD', 'direct');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php'
+#sudo echo -en "define('FS_METHOD', 'direct');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php
+sudo dos2unix ./wordpress/wp-config.php
 
 # ------- Installation of Php, Apache, Firewall, zip, sendmail, etc 
 
