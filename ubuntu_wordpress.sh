@@ -159,25 +159,25 @@ wget http://wordpress.org/latest.tar.gz
 tar xzvf latest.tar.gz
 
 # Pre Configuring Wordpress
-sudo cp ./wordpress/wp-config-sample.php ./wordpress/wp-config.php
-sudo sed -i '/put your unique phrase here/d' ./wordpress/wp-config.php # delete matching pattern
-sudo sed -i '$d' ./wordpress/wp-config.php # delete last line
+cp ./wordpress/wp-config-sample.php ./wordpress/wp-config.php
+sed -i '/put your unique phrase here/d' ./wordpress/wp-config.php # delete matching pattern
+sed -i '$d' ./wordpress/wp-config.php # delete last line
 # - for an extra layer of security, replace default table prefix of Wordpress for MySQL
 table_prefix=$(tr </dev/urandom -dc A-Za-z | head -c6)_ || WP_
-sudo sed -i 's/wp_/'$table_prefix'/g' ./wordpress/wp-config.php
+sed -i 's/wp_/'$table_prefix'/g' ./wordpress/wp-config.php
 # - place MySQL database information on wrodpress config
-sudo sed -i 's/database_name_here/'$db_name'/g' ./wordpress/wp-config.php
-sudo sed -i 's/username_here/'$db_user_local'/g' ./wordpress/wp-config.php
-sudo sed -i 's/password_here/'$MYSQLPASSWORD'/g' ./wordpress/wp-config.php
-sudo sed -i "s/define( 'DB_HOST', 'localhost' );/define( 'DB_HOST', '${db_host_local}' );/g" ./wordpress/wp-config.php
+sed -i 's/database_name_here/'$db_name'/g' ./wordpress/wp-config.php
+sed -i 's/username_here/'$db_user_local'/g' ./wordpress/wp-config.php
+sed -i 's/password_here/'$MYSQLPASSWORD'/g' ./wordpress/wp-config.php
+sed -i "s/define( 'DB_HOST', 'localhost' );/define( 'DB_HOST', '${db_host_local}' );/g" ./wordpress/wp-config.php
 # - set up SALT to enhance Wordpress security
-sudo curl -s https://api.wordpress.org/secret-key/1.1/salt/ > ./wordpress/keys.txt
-#cat ./wordpress/keys.txt >> ./wordpress/wp-config.php
-sudo bash -c "cat ./wordpress/keys.txt >> ./wordpress/wp-config.php"
+curl -s https://api.wordpress.org/secret-key/1.1/salt/ > ./wordpress/keys.txt
+cat ./wordpress/keys.txt >> ./wordpress/wp-config.php
+#sudo bash -c "cat ./wordpress/keys.txt >> ./wordpress/wp-config.php"
 # - enable to update WordPress Directly without using any FTP
-sudo bash -c 'echo -en "define('FS_METHOD', 'direct');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php'
-#sudo echo -en "define('FS_METHOD', 'direct');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php
-sudo dos2unix ./wordpress/wp-config.php
+#sudo bash -c 'echo -en "define('FS_METHOD', 'direct');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php'
+echo -en "define('FS_METHOD', 'direct');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php
+dos2unix ./wordpress/wp-config.php
 
 # ------- Installation of Php, Apache, Firewall, zip, sendmail, etc 
 
