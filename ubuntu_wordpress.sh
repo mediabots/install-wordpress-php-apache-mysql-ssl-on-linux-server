@@ -178,6 +178,7 @@ cat ./wordpress/keys.txt >> ./wordpress/wp-config.php
 #sudo bash -c 'echo -en "define('FS_METHOD', 'direct');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php'
 echo -en "define('FS_METHOD', 'direct');\r\ndefine('WP_HOME','http://${SITENAME}');\r\ndefine('WP_SITEURL','http://${SITENAME}');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php
 dos2unix ./wordpress/wp-config.php
+#rm -f ./wordpress/keys.txt
 
 # ------- Installation of Php, Apache, Firewall, zip, sendmail, etc 
 
@@ -229,6 +230,9 @@ sudo systemctl restart apache2
 sudo find /var/www/html/$SITENAME -type d -exec chmod 750 {} \;
 sudo find /var/www/html/$SITENAME -type f -exec chmod 640 {} \;
 
+# clean
+rm -rf ./wordpress/
+rm -f latest.tar.gz
 
 # ------- Firewall Installation & configuration
 
