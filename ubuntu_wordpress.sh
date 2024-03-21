@@ -176,7 +176,7 @@ cat ./wordpress/keys.txt >> ./wordpress/wp-config.php
 #sudo bash -c "cat ./wordpress/keys.txt >> ./wordpress/wp-config.php"
 # - enable to update WordPress Directly without using any FTP
 #sudo bash -c 'echo -en "define('FS_METHOD', 'direct');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php'
-echo -en "define('FS_METHOD', 'direct');\r\ndefine('WP_HOME','http://${SITENAME}');\r\ndefine('WP_SITEURL','http://${SITENAME}');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php
+echo -en "define('FS_METHOD', 'direct');\r\ndefine('WP_HOME','http://www.${SITENAME}');\r\ndefine('WP_SITEURL','http://www.${SITENAME}');\r\nrequire_once(ABSPATH . 'wp-settings.php');" >> ./wordpress/wp-config.php
 dos2unix ./wordpress/wp-config.php
 #rm -f ./wordpress/keys.txt
 
