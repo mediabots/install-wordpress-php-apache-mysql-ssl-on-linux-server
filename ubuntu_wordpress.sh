@@ -190,6 +190,7 @@ sudo -E apt -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-con
 yes 'y' | sudo sendmailconfig 
 
 # configure Apache
+sudo systemctl enable --now apache2
 sudo chown -R "$USER":root /var/www
 
 # - prepare Website for Apache
