@@ -196,6 +196,7 @@ sudo chown -R "$USER":root /var/www
 # - prepare Website for Apache
 mkdir /var/www/html/$SITENAME
 sudo touch /var/www/html/$SITENAME/.htaccess
+APACHE_LOG_DIR=/var/log/apache2
 cat << EOF | sudo tee /etc/apache2/sites-available/${SITENAME}.conf
 <Directory /var/www/html/$SITENAME>
 	AllowOverride All
